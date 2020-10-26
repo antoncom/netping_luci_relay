@@ -4,7 +4,7 @@
 	var xhr = new XHR(false);
 	var btn_spinner = document.getElementById("btn_enable_spinner");;
 	// получаем название команды, входное данное и id реле
-	var action = btn.name || "0",
+	var action = btn.name || btn.getAttribute("name") || "0",
 		relay = btn.getAttribute("data-relay") || "0",
 		// для команды "rename" входное данное берём из <input type=text value>
 		// для других команд - из <input type=button data-payload>
@@ -32,6 +32,34 @@ function spinner(element, state) {
 		element.style.width = "0px";
 		element.innerHTML = '';
 	}
+}
+
+function handleDelete(btn) {
+	return function(btn) {
+		button_action(btn.target)
+	}
+}
+
+function remove_relay(btn) {
+	var relayId = btn.getAttribute("data-relay") || "0",
+		relayName = btn.getAttribute("data-relay-name") || "0";
+
+	L.require("ui").then(function(ui){
+		L.showModal('Удалить реле', [
+			E('div', 'Вы действительно хотите удалить данное реле из списка?'),
+			E('pre', relayName ),
+			E('div', { class: 'right' }, [
+				E('div', { class: 'btn', click: L.hideModal }, _('Отмена')),
+				' ',
+				// transport "delete" button attributes to "Yes" button inside the modal
+				E('div', { 
+					class: 'btn danger', 
+					click: handleDelete(btn), 
+					"data-relay": relayId,
+					"name": "delete" }, 'Да, удалить это реле'),
+			])
+		]);
+	})
 }
 //]]>
 </script>

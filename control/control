@@ -1,5 +1,5 @@
 Package: luci-netping-relay
-Version: 1.0.0
+Version: 1.0.1
 Depends: luci, luci-compat
 Architecture: all
 Maintainer: Anton Gavrilyuk <amigoalt@gmail.com>

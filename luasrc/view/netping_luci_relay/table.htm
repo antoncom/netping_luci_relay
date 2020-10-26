@@ -43,9 +43,10 @@
 						data-relay="<%=k%>" 
 						style="display: initial;" />
 					<% if v.embedded == "0" then %>
-					<input type="button" class="cbi-button cbi-button-reset" onclick="button_action(this)"
+					<input type="button" class="cbi-button cbi-button-reset" onclick="remove_relay(this)"
 						value="Удалить"
 						name="delete"
+						data-relay-name="<%=v.name%>"
 						data-relay="<%=k%>"
 						style="display: initial;" />
 					<% end %>
